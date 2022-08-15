@@ -1,3 +1,12 @@
+# Drafts
+
+#link: https://r5g1-drafts.netlify.app/
+
+#us: HTML, SCSS, SCSS-module, React, TypeScript, Webpack
+
+![drafts](https://user-images.githubusercontent.com/71373383/182563299-c69cfb63-4cac-4511-bcee-2004944be8a3.jpg)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

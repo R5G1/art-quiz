@@ -1,0 +1,16 @@
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - 100px);
+    background: url('https://github.com/R5G1/image-data/blob/master/full/173full.jpg?raw=true');
+    background-position: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    img {
+        height: 255px;
+        width: 100%;
+    }
+}
