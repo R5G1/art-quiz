@@ -4,11 +4,11 @@ const Navbar = () => {
   function changeBg(prop: boolean) {
     const activeStyle = {
       background: 'rgba(255, 255, 255, 0.514)',
-      color: 'rgb(0, 0, 0)',
+      color: 'var(--main-color-w)',
     };
     const offActiveStyle = {
-      background: 'rgba(214, 203, 203, 0)',
-      color: 'rgb(252, 252, 252)',
+      background: 'var(--main-color-o)',
+      color: 'var(--main-color-w)',
     };
     return prop ? activeStyle : offActiveStyle;
   }

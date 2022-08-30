@@ -5,8 +5,8 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background: #192f2d;
-    color: rgb(252, 252, 252);
+    background: var(--main-color-d);
+    color: var(--main-color-w);
 
 }
 
@@ -14,9 +14,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: rgb(252, 252, 252);
-    background-color: rgba(214, 203, 203, 0);
-    border: 2px solid rgb(253, 253, 253);
+    color: var(--main-color-w);
+    background-color: var(--main-color-o);
+    border: 2px solid var(--main-color-w);
     width: 240px;
     height: 40px;
     transition: background 0.3s ease 0s;
