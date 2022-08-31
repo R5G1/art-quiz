@@ -1,19 +1,27 @@
 import { ReactNode, useState } from 'react';
 import { Link } from 'react-router-dom';
 import images from '../../../components/Data/ImagesInfo';
+import Modal from '../../../components/modal/modal';
 import style from '../gameArtistQuiz/GameArtistQuiz.module.scss';
+import shuffle from './gameArtistQuizComponents/shuffle';
 
 interface IGameArtistQuiz {
-  children?: React.ReactNode;
+  // children?: React.ReactNode;
   dataIndex: number;
-  setState: any;
+  setState: (value: boolean) => void | undefined;
 }
-function GameArtistQuiz({ children, dataIndex, setState }: IGameArtistQuiz) {
+function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
   const [number, setNumber] = useState(dataIndex);
+  const [modalActive, setModalActive] = useState(false);
+
   const itemQuestions = 4;
+  const styleBg = { background: 'rgb(0, 0, 0, 0' };
+  const styleBgTrue = { background: 'rgb(0, 255, 13)' };
+  const styleBgfalse = { background: 'rgb(255, 0, 0)' };
+  const [btnBg, setBtnBg] = useState(false);
 
   function state() {
-    setState((prev: boolean) => !prev);
+    setState(true);
   }
 
   function array() {
@@ -24,28 +32,15 @@ function GameArtistQuiz({ children, dataIndex, setState }: IGameArtistQuiz) {
     return array;
   }
 
-  function shuffle(array: string[]) {
-    let currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
-
-    while (0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-  }
-
   const result = shuffle(array());
 
   function rightQuestions(params: string) {
     if (params === images[number].author) {
-      setNumber(number + 1);
-      console.log('true', number);
+      setBtnBg(true);
+      setModalActive(true);
+    } else if (params != images[number].author) {
+      setBtnBg(false);
+      setModalActive(true);
     }
   }
 
@@ -66,7 +61,7 @@ function GameArtistQuiz({ children, dataIndex, setState }: IGameArtistQuiz) {
     <div className={style.main}>
       <div className={style.mainTitle}>
         <button onClick={state}>Назад</button>
-        <p>Кто является автором этой картины?</p>
+        <h4>Кто является автором этой картины?</h4>
         <p>
           {images[number].name} {images[number].year} год
         </p>
@@ -80,7 +75,32 @@ function GameArtistQuiz({ children, dataIndex, setState }: IGameArtistQuiz) {
           }}
         ></div>
         <Questions />
-        <div></div>
+        <Modal active={modalActive} setActive={setModalActive}>
+          <>
+            <div
+              className={style.mainConentBg}
+              style={{
+                backgroundImage: `url(https://raw.githubusercontent.com/R5G1/image-data/master/img/${number}.jpg)`,
+              }}
+            >
+              <div className={style.mainConentBgSensor} style={btnBg ? styleBgTrue : styleBgfalse}>
+                <p>{btnBg ? '+' : '-'}</p>
+              </div>
+            </div>
+            <h4 className={style.mainConentModalh4}>{images[number].author}</h4>
+            <p className={style.mainConentModalP}>
+              {images[number].name} {images[number].year} год
+            </p>
+            <button
+              className={style.mainConentModalBtn}
+              onClick={() => {
+                setModalActive(false), setNumber(number + 1);
+              }}
+            >
+              Следующий
+            </button>
+          </>
+        </Modal>
       </div>
     </div>
   );
