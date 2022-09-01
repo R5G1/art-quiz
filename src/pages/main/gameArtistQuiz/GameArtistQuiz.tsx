@@ -1,24 +1,23 @@
-import { ReactNode, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import images from '../../../components/Data/ImagesInfo';
 import Modal from '../../../components/modal/modal';
 import style from '../gameArtistQuiz/GameArtistQuiz.module.scss';
 import shuffle from './gameArtistQuizComponents/shuffle';
-
+import imgTrue from '../../../components/img/1.svg';
+import imgFalse from '../../../components/img/0.svg';
+import ArrayCheck from './gameArtistQuizComponents/ArrayCheck';
 interface IGameArtistQuiz {
-  // children?: React.ReactNode;
   dataIndex: number;
   setState: (value: boolean) => void | undefined;
 }
 function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
   const [number, setNumber] = useState(dataIndex);
   const [modalActive, setModalActive] = useState(false);
-
+  const [btnBg, setBtnBg] = useState(false);
   const itemQuestions = 4;
-  const styleBg = { background: 'rgb(0, 0, 0, 0' };
+
   const styleBgTrue = { background: 'rgb(0, 255, 13)' };
   const styleBgfalse = { background: 'rgb(255, 0, 0)' };
-  const [btnBg, setBtnBg] = useState(false);
 
   function state() {
     setState(true);
@@ -32,8 +31,6 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
     return array;
   }
 
-  const result = shuffle(array());
-
   function rightQuestions(params: string) {
     if (params === images[number].author) {
       setBtnBg(true);
@@ -45,6 +42,7 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
   }
 
   function Questions() {
+    const result = shuffle(array());
     const listItems = result.map((item, index: number) => (
       <div key={Math.random().toString()}>
         <div className={style.mainConent}>
@@ -73,7 +71,11 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
           style={{
             backgroundImage: `url(https://raw.githubusercontent.com/R5G1/image-data/master/img/${number}.jpg)`,
           }}
-        ></div>
+        >
+          <div className={style.mainConentBgItem}>
+            <ArrayCheck number={number} checkState={modalActive} checkBoolean={btnBg} />
+          </div>
+        </div>
         <Questions />
         <Modal active={modalActive} setActive={setModalActive}>
           <>
@@ -84,7 +86,7 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
               }}
             >
               <div className={style.mainConentBgSensor} style={btnBg ? styleBgTrue : styleBgfalse}>
-                <p>{btnBg ? '+' : '-'}</p>
+                <p>{btnBg ? <img src={imgTrue} alt="" /> : <img src={imgFalse} alt="" />}</p>
               </div>
             </div>
             <h4 className={style.mainConentModalh4}>{images[number].author}</h4>

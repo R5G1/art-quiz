@@ -38,9 +38,11 @@
 }
 
 
-
-.mainConentBtn {
-    margin: 5px;
+.mainConentBgItem {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 .mainTitle {
@@ -59,7 +61,7 @@
     width: 50px;
     height: 50px;
     border-radius: 100%;
-    
+
     color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;

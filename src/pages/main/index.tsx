@@ -11,8 +11,8 @@ function Main() {
   const [number, setNumber] = useState(0);
   const sumQuestions = 10;
 
-  const count = useAppSelector((state) => state.counter.value);
-  const dispatch = useAppDispatch();
+  // const count = useAppSelector((state) => state.counter.value);
+  // const dispatch = useAppDispatch();
 
   function btnClick(params: number) {
     setState((prev) => !prev);
@@ -46,7 +46,7 @@ function Main() {
   return (
     <div className={style.main}>
       {state ? <CreateImg /> : <GameArtistQuiz dataIndex={number} setState={setState} />}
-      <div>
+      {/* <div>
         <button aria-label="Increment value" onClick={() => dispatch(increment(6))}>
           Increment
         </button>
@@ -54,7 +54,7 @@ function Main() {
         <button aria-label="Decrement value" onClick={() => dispatch(decrement(1))}>
           Decrement
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
