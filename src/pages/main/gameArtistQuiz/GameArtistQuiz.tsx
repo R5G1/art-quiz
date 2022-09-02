@@ -3,9 +3,11 @@ import images from '../../../components/Data/ImagesInfo';
 import Modal from '../../../components/modal/modal';
 import style from '../gameArtistQuiz/GameArtistQuiz.module.scss';
 import shuffle from './gameArtistQuizComponents/shuffle';
-import imgTrue from '../../../components/img/1.svg';
-import imgFalse from '../../../components/img/0.svg';
+import imgTrue from '../../../components/img/gameArtistQuiz/1.svg';
+import imgFalse from '../../../components/img/gameArtistQuiz/0.svg';
 import ArrayCheck from './gameArtistQuizComponents/ArrayCheck';
+import QustionsArray from './gameArtistQuizComponents/qustionsArray';
+import TotalResponse from './gameArtistQuizComponents/totalResponse';
 interface IGameArtistQuiz {
   dataIndex: number;
   setState: (value: boolean) => void | undefined;
@@ -14,24 +16,9 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
   const [number, setNumber] = useState(dataIndex);
   const [modalActive, setModalActive] = useState(false);
   const [btnBg, setBtnBg] = useState(false);
-  const itemQuestions = 4;
-
-  const styleBgTrue = { background: 'rgb(0, 255, 13)' };
-  const styleBgfalse = { background: 'rgb(255, 0, 0)' };
-
-  function state() {
-    setState(true);
-  }
-
-  function array() {
-    const array: string[] = [];
-    for (let i = number; i < number + itemQuestions; i++) {
-      array.push(images[i].author);
-    }
-    return array;
-  }
-
-  function rightQuestions(params: string) {
+  const [sumNumber, setSumNumber] = useState(0);
+  const totalSum = 10;
+  function Response(params: string) {
     if (params === images[number].author) {
       setBtnBg(true);
       setModalActive(true);
@@ -42,11 +29,11 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
   }
 
   function Questions() {
-    const result = shuffle(array());
+    const result = shuffle(QustionsArray(number));
     const listItems = result.map((item, index: number) => (
       <div key={Math.random().toString()}>
         <div className={style.mainConent}>
-          <button className={style.mainConentBtn} onClick={() => rightQuestions(item)}>
+          <button className={style.mainConentBtn} onClick={() => Response(item)}>
             {item}
           </button>
         </div>
@@ -58,7 +45,7 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
   return (
     <div className={style.main}>
       <div className={style.mainTitle}>
-        <button onClick={state}>Назад</button>
+        <button onClick={() => setState(true)}>Назад</button>
         <h4>Кто является автором этой картины?</h4>
         <p>
           {images[number].name} {images[number].year} год
@@ -85,7 +72,7 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
                 backgroundImage: `url(https://raw.githubusercontent.com/R5G1/image-data/master/img/${number}.jpg)`,
               }}
             >
-              <div className={style.mainConentBgSensor} style={btnBg ? styleBgTrue : styleBgfalse}>
+              <div className={style.mainConentBgSensor}>
                 <p>{btnBg ? <img src={imgTrue} alt="" /> : <img src={imgFalse} alt="" />}</p>
               </div>
             </div>
@@ -96,13 +83,30 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
             <button
               className={style.mainConentModalBtn}
               onClick={() => {
-                setModalActive(false), setNumber(number + 1);
+                setSumNumber(sumNumber + 1), setModalActive(false), setNumber(number + 1);
               }}
             >
               Следующий
             </button>
           </>
         </Modal>
+        {sumNumber === totalSum ? (
+          <Modal active={true} setActive={setModalActive}>
+            <>
+              <TotalResponse />
+              <button
+                className={style.mainConentModalBtn}
+                onClick={() => {
+                  setState(true); // setSumNumber(sumNumber + 1), setModalActive(false);
+                }}
+              >
+                Назад
+              </button>
+            </>
+          </Modal>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

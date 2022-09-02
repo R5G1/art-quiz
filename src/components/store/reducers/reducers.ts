@@ -1,32 +1,32 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { nameDate } from '../../Data/DataMain';
 import type { RootState } from '../store';
 
-interface CounterState {
-  value: number;
+interface Iarray {
+  name: string;
+  number: number;
 }
 
-const initialState: CounterState = {
-  value: 0,
+interface InameDate {
+  nameDate: Iarray[];
+}
+
+const initialState: InameDate = {
+  nameDate: [],
 };
 
 export const counterSlice = createSlice({
-  name: 'counter',
+  name: 'array',
   initialState,
   reducers: {
-    increment: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
-    },
-    decrement: (state, action: PayloadAction<number>) => {
-      state.value -= action.payload;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    addState: (state, action: PayloadAction<Iarray[]>) => {
+      state.nameDate = action.payload;
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { addState } = counterSlice.actions;
 
-export const selectCount = (state: RootState) => state.counter.value;
+// export const selectCount = (state: RootState) => state.counter.value;
 
 export default counterSlice.reducer;

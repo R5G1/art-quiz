@@ -6,11 +6,11 @@ interface IArrayCheck {
   checkBoolean: boolean;
 }
 function ArrayCheck({ number, checkState, checkBoolean }: IArrayCheck) {
-  const [state, setState] = useState(number);
+  const [state, setState] = useState(0);
 
   const array = () => {
     const array: number[] = [];
-    for (let i = 0; i <= 10; i++) {
+    for (let i = 0; i <= 9; i++) {
       array.push(i);
     }
     return array;
@@ -22,10 +22,11 @@ function ArrayCheck({ number, checkState, checkBoolean }: IArrayCheck) {
     if (checkState) {
       setStateArray(
         stateArray.map((item, index) => {
-          if (number === index) return checkBoolean;
+          if (state === index) return checkBoolean;
           return item;
         })
       );
+      setState(state + 1);
     }
   }, [checkState]);
 
@@ -38,7 +39,6 @@ function ArrayCheck({ number, checkState, checkBoolean }: IArrayCheck) {
     if (params === false) return styleBgfalse;
     else styleBg;
   }
-  console.log(checkState);
 
   function result() {
     return stateArray.map((item, index) => (
@@ -47,7 +47,6 @@ function ArrayCheck({ number, checkState, checkBoolean }: IArrayCheck) {
       </div>
     ));
   }
-
   return (
     <div>
       <div className={styles.conteiner}>{result()}</div>

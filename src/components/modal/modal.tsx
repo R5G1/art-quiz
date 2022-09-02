@@ -3,8 +3,8 @@ import styles from '../modal/modal.module.scss';
 
 interface IModal {
   children?: React.ReactNode;
-  active: boolean;
-  setActive: (value: boolean) => void | undefined;
+  active?: boolean;
+  setActive?: (value: boolean) => void | undefined;
 }
 
 function Modal({ active, setActive, children }: IModal) {

@@ -75,6 +75,10 @@ button {
     &:hover {
         background-color: var(--main-color-mh);
     }
+
+    @media (max-width:420px) {
+        min-width: 50px;
+    }
 }
 
 p {
