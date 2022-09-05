@@ -3,7 +3,7 @@ interface InameDate {
   number: number;
 }
 
-export const nameDate: InameDate[] = [
+export const nameArray: InameDate[] = [
   { name: 'Portrait', number: 0 },
   { name: 'Landscape', number: 0 },
   { name: 'Still life', number: 0 },

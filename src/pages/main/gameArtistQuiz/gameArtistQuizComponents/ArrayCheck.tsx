@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './styles/arrayCount.module.scss';
 interface IArrayCheck {
   number: number;
-  checkState?: boolean;
+  checkState: boolean;
   checkBoolean: boolean;
 }
 function ArrayCheck({ number, checkState, checkBoolean }: IArrayCheck) {

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { nameDate } from '../../Data/DataMain';
+import { nameArray } from '../../Data/nameArray';
+
 import type { RootState } from '../store';
 
 interface Iarray {
@@ -8,11 +9,11 @@ interface Iarray {
 }
 
 interface InameDate {
-  nameDate: Iarray[];
+  array: Iarray[];
 }
 
-const initialState: InameDate = {
-  nameDate: [],
+const initialState: any = {
+  array: [],
 };
 
 export const counterSlice = createSlice({
@@ -20,7 +21,10 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     addState: (state, action: PayloadAction<Iarray[]>) => {
-      state.nameDate = action.payload;
+      state.array = action.payload;
+      // {
+      //   return [...state].push(action.payload);
+      // }
     },
   },
 });

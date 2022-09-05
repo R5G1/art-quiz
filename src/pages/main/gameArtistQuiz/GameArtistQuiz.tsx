@@ -8,24 +8,51 @@ import imgFalse from '../../../components/img/gameArtistQuiz/0.svg';
 import ArrayCheck from './gameArtistQuizComponents/ArrayCheck';
 import QustionsArray from './gameArtistQuizComponents/qustionsArray';
 import TotalResponse from './gameArtistQuizComponents/totalResponse';
+import { useAppDispatch, useAppSelector } from '../../../components/store/hooks';
+import { addState } from '../../../components/store/reducers/reducers';
+import { nameArray } from '../../../components/Data/nameArray';
 interface IGameArtistQuiz {
   dataIndex: number;
   setState: (value: boolean) => void | undefined;
 }
 function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
-  const [number, setNumber] = useState(dataIndex);
+  const array = useAppSelector((state) => state.counter.array);
+  const dispatch = useAppDispatch();
+
+  const sumQuestions = 10;
+  const totalSum = 10;
+  const [number, setNumber] = useState(dataIndex * sumQuestions);
   const [modalActive, setModalActive] = useState(false);
   const [btnBg, setBtnBg] = useState(false);
   const [sumNumber, setSumNumber] = useState(0);
-  const totalSum = 10;
+
+  function name() {
+    interface Iarray {
+      name: string;
+      number: number;
+    }
+    const newArray: Iarray[] = [...nameArray];
+    newArray.map((item, index) => {
+      if (dataIndex === index) {
+        console.log(item);
+        return (item.number += 1);
+      }
+      return item;
+    });
+    return newArray;
+  }
+
   function Response(params: string) {
     if (params === images[number].author) {
       setBtnBg(true);
       setModalActive(true);
     } else if (params != images[number].author) {
-      setBtnBg(false);
+      setBtnBg(true);
       setModalActive(true);
     }
+
+    dispatch(addState(name()));
+    console.log(name());
   }
 
   function Questions() {
@@ -45,7 +72,9 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
   return (
     <div className={style.main}>
       <div className={style.mainTitle}>
-        <button onClick={() => setState(true)}>Назад</button>
+        <button className={style.mainTitleBtn} onClick={() => setState(true)}>
+          Назад
+        </button>
         <h4>Кто является автором этой картины?</h4>
         <p>
           {images[number].name} {images[number].year} год

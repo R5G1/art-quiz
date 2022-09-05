@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from '../../components/store/hooks';
 import { Link } from 'react-router-dom';
-import { nameDate } from '../../components/Data/DataMain';
+import { nameArray } from '../../components/Data/nameArray';
 import images from '../../components/Data/ImagesInfo';
 import { addState } from '../../components/store/reducers/reducers';
 import style from '../main/index.module.scss';
@@ -11,21 +11,20 @@ function Main() {
   const [number, setNumber] = useState(0);
   const sumQuestions = 10;
 
-  const count = useAppSelector((state) => state.counter);
+  const array = useAppSelector((state) => state.counter.array);
   const dispatch = useAppDispatch();
 
   function btnClick(params: number) {
     setState((prev) => !prev);
     setNumber(params);
   }
-  console.log(count);
 
   function CreateImg() {
-    const listItems = nameDate.map((item, index: number) => (
+    const listItems = nameArray.map((item: any, index: number) => (
       <div
         key={Math.random().toString()}
         onClick={() => {
-          btnClick(index * sumQuestions);
+          btnClick(index);
         }}
       >
         <div className={style.mainConent}>
@@ -48,7 +47,7 @@ function Main() {
     <div className={style.main}>
       {state ? <CreateImg /> : <GameArtistQuiz dataIndex={number} setState={setState} />}
       <div>
-        <button aria-label="Increment value" onClick={() => dispatch(addState)}>
+        <button aria-label="Increment value" onClick={() => dispatch(addState(array))}>
           Increment
         </button>
         {/* <span>{count}</span> */}
