@@ -1,15 +1,13 @@
 import { useAppSelector, useAppDispatch } from '../../components/store/hooks';
-import { Link } from 'react-router-dom';
-import { nameArray } from '../../components/Data/nameArray';
-import images from '../../components/Data/ImagesInfo';
 import { addState } from '../../components/store/reducers/reducers';
 import style from '../main/index.module.scss';
 import GameArtistQuiz from './gameArtistQuiz/GameArtistQuiz';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Iarray } from '../../components/type/type';
+import arrayCopy from './gameArtistQuiz/gameArtistQuizComponents/arrayCopy';
 function Main() {
   const [state, setState] = useState(true);
   const [number, setNumber] = useState(0);
-  const sumQuestions = 10;
 
   const array = useAppSelector((state) => state.counter.array);
   const dispatch = useAppDispatch();
@@ -17,18 +15,30 @@ function Main() {
   function btnClick(params: number) {
     setState((prev) => !prev);
     setNumber(params);
+    dispatch(addState(arrayCopy(false, params, array)));
   }
 
-  function CreateImg() {
-    const listItems = nameArray.map((item: any, index: number) => (
+  function CreateCard() {
+    const sumQuestions = 10;
+    const listItems = array.map((item: Iarray, index: number) => (
       <div
         key={Math.random().toString()}
         onClick={() => {
           btnClick(index);
         }}
       >
-        <div className={style.mainConent}>
-          <div className={style.mainConentName}>{item.name}</div>
+        <div
+          className={style.mainConent}
+          style={
+            array[index].check
+              ? { background: 'var(--main-color-o)' }
+              : { background: 'var(--bg-color-o1)' }
+          }
+        >
+          <div className={style.mainConentName}>
+            <p>{item.name}</p>{' '}
+            <p className={style.mainConentNameP}>{item.number > 0 ? `${item.number} / 10` : ''}</p>
+          </div>
 
           <div
             className={style.mainConentBg}
@@ -43,18 +53,14 @@ function Main() {
     ));
     return <div className={style.mainConteiner}>{listItems}</div>;
   }
+
+  useEffect(() => {
+    CreateCard();
+  }, [dispatch]);
+
   return (
     <div className={style.main}>
-      {state ? <CreateImg /> : <GameArtistQuiz dataIndex={number} setState={setState} />}
-      <div>
-        <button aria-label="Increment value" onClick={() => dispatch(addState(array))}>
-          Increment
-        </button>
-        {/* <span>{count}</span> */}
-        {/* <button aria-label="Decrement value" onClick={() => dispatch(decrement(1))}>
-          Decrement
-        </button> */}
-      </div>
+      {state ? <CreateCard /> : <GameArtistQuiz dataIndex={number} setState={setState} />}
     </div>
   );
 }

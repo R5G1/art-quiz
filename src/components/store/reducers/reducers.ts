@@ -13,7 +13,7 @@ interface InameDate {
 }
 
 const initialState: any = {
-  array: [],
+  array: nameArray,
 };
 
 export const counterSlice = createSlice({

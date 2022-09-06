@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import images from '../../../components/Data/ImagesInfo';
 import Modal from '../../../components/modal/modal';
 import style from '../gameArtistQuiz/GameArtistQuiz.module.scss';
 import shuffle from './gameArtistQuizComponents/shuffle';
 import imgTrue from '../../../components/img/gameArtistQuiz/1.svg';
 import imgFalse from '../../../components/img/gameArtistQuiz/0.svg';
-import ArrayCheck from './gameArtistQuizComponents/ArrayCheck';
 import QustionsArray from './gameArtistQuizComponents/qustionsArray';
 import TotalResponse from './gameArtistQuizComponents/totalResponse';
 import { useAppDispatch, useAppSelector } from '../../../components/store/hooks';
 import { addState } from '../../../components/store/reducers/reducers';
-import { nameArray } from '../../../components/Data/nameArray';
+import arrayCopy from './gameArtistQuizComponents/arrayCopy';
+import QustionsArrayCheck from './gameArtistQuizComponents/qustionsArrayCheck';
 interface IGameArtistQuiz {
   dataIndex: number;
   setState: (value: boolean) => void | undefined;
@@ -25,34 +25,20 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
   const [modalActive, setModalActive] = useState(false);
   const [btnBg, setBtnBg] = useState(false);
   const [sumNumber, setSumNumber] = useState(0);
-
-  function name() {
-    interface Iarray {
-      name: string;
-      number: number;
-    }
-    const newArray: Iarray[] = [...nameArray];
-    newArray.map((item, index) => {
-      if (dataIndex === index) {
-        console.log(item);
-        return (item.number += 1);
-      }
-      return item;
-    });
-    return newArray;
-  }
+  const [btnBgState, setBtnBgState] = useState(false);
 
   function Response(params: string) {
     if (params === images[number].author) {
       setBtnBg(true);
       setModalActive(true);
     } else if (params != images[number].author) {
-      setBtnBg(true);
+      setBtnBg(false);
       setModalActive(true);
     }
+  }
 
-    dispatch(addState(name()));
-    console.log(name());
+  function addDispatch() {
+    dispatch(addState(arrayCopy(true, dataIndex, array, btnBg)));
   }
 
   function Questions() {
@@ -82,14 +68,17 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
       </div>
 
       <div>
-        <div
-          className={style.mainConentBg}
-          style={{
-            backgroundImage: `url(https://raw.githubusercontent.com/R5G1/image-data/master/img/${number}.jpg)`,
-          }}
-        >
-          <div className={style.mainConentBgItem}>
-            <ArrayCheck number={number} checkState={modalActive} checkBoolean={btnBg} />
+        <div className={style.mCBgConteiner}>
+          <div
+            onClick={() => setBtnBgState((prev) => !prev)}
+            className={btnBgState ? style.mainConentBgFull : style.mainConentBg}
+            style={{
+              backgroundImage: `url(https://raw.githubusercontent.com/R5G1/image-data/master/img/${number}.jpg)`,
+            }}
+          >
+            <div className={style.mainConentBgItem}>
+              <QustionsArrayCheck number={number} checkState={modalActive} checkBoolean={btnBg} />
+            </div>
           </div>
         </div>
         <Questions />
@@ -112,7 +101,10 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
             <button
               className={style.mainConentModalBtn}
               onClick={() => {
-                setSumNumber(sumNumber + 1), setModalActive(false), setNumber(number + 1);
+                setSumNumber(sumNumber + 1),
+                  setModalActive(false),
+                  setNumber(number + 1),
+                  addDispatch();
               }}
             >
               Следующий
@@ -122,11 +114,11 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
         {sumNumber === totalSum ? (
           <Modal active={true} setActive={setModalActive}>
             <>
-              <TotalResponse />
+              <TotalResponse number={dataIndex} />
               <button
                 className={style.mainConentModalBtn}
                 onClick={() => {
-                  setState(true); // setSumNumber(sumNumber + 1), setModalActive(false);
+                  setState(true);
                 }}
               >
                 Назад

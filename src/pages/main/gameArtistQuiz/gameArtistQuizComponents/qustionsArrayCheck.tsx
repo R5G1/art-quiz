@@ -5,7 +5,7 @@ interface IArrayCheck {
   checkState: boolean;
   checkBoolean: boolean;
 }
-function ArrayCheck({ number, checkState, checkBoolean }: IArrayCheck) {
+function QustionsArrayCheck({ number, checkState, checkBoolean }: IArrayCheck) {
   const [state, setState] = useState(0);
 
   const array = () => {
@@ -54,4 +54,4 @@ function ArrayCheck({ number, checkState, checkBoolean }: IArrayCheck) {
   );
 }
 
-export default ArrayCheck;
+export default QustionsArrayCheck;

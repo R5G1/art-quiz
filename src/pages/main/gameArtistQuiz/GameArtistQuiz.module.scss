@@ -24,11 +24,15 @@
     cursor: pointer;
 }
 
-.mainConentBg {
-    background: #000;
-    max-width: 700px;
-    width: 100%;
-    height: 70vh;
+.mCBgConteiner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainConentBg,
+.mainConentBgFull {
+
     padding: 20px;
     background-position: 0 0;
     background-repeat: no-repeat;
@@ -37,6 +41,23 @@
     margin: auto;
 }
 
+.mainConentBg {
+    max-width: 700px;
+    width: 100%;
+    height: 70vh;
+    cursor: pointer;
+}
+
+.mainConentBgFull {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+
+    margin: 20px;
+    width: 90vw;
+    height: 90vh;
+    cursor: pointer;
+}
 
 .mainConentBgItem {
     height: 100%;

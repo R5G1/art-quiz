@@ -1,6 +1,5 @@
 .main {
     min-height: calc(100vh - 100px);
-
 }
 
 .mainConteiner {
@@ -11,12 +10,14 @@
     flex-wrap: wrap;
     max-width: 900px;
     margin: auto;
+
 }
 
 .mainConent {
     margin: 10px;
-    width: 170px;
+    width: 185px;
     height: 190px;
+    border-radius: 10px;
     background: var(--main-color-o);
     cursor: pointer;
 }
@@ -30,11 +31,18 @@
     background-size: 100% 100%;
     border-radius: 10px;
     margin: 0 auto;
+
+
 }
 
 .mainConentName {
     padding: 5px 0px;
-    font-weight: var(--front-w7);
-    color: var(--main-color-m);
-}
+    display: flex;
+    justify-content: space-between;
 
+    p {
+        font-weight: var(--front-w7);
+        color: var(--main-color-m);
+
+    }
+}
