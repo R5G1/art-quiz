@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react';
 import images from '../../../components/Data/ImagesInfo';
 import Modal from '../../../components/modal/modal';
-import style from '../gameArtistQuiz/GameArtistQuiz.module.scss';
-import shuffle from './gameArtistQuizComponents/shuffle';
+import style from './styles/GameArtistQuiz.module.scss';
+import shuffle from './shuffle';
 import imgTrue from '../../../components/img/gameArtistQuiz/1.svg';
 import imgFalse from '../../../components/img/gameArtistQuiz/0.svg';
 import QustionsArray from './gameArtistQuizComponents/qustionsArray';
 import TotalResponse from './gameArtistQuizComponents/totalResponse';
 import { useAppDispatch, useAppSelector } from '../../../components/store/hooks';
 import { addState } from '../../../components/store/reducers/reducers';
-import arrayCopy from './gameArtistQuizComponents/arrayCopy';
+import arrayCopy from './arrayCopy';
 import QustionsArrayCheck from './gameArtistQuizComponents/qustionsArrayCheck';
 interface IGameArtistQuiz {
   dataIndex: number;
+  imagesIndex: number;
+  sumQuestions: number;
   setState: (value: boolean) => void | undefined;
 }
-function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
+function GameArtistQuiz({ dataIndex, imagesIndex, setState, sumQuestions }: IGameArtistQuiz) {
   const array = useAppSelector((state) => state.counter.array);
   const dispatch = useAppDispatch();
 
-  const sumQuestions = 10;
-  const totalSum = 10;
-  const [number, setNumber] = useState(dataIndex * sumQuestions);
+  const [number, setNumber] = useState(imagesIndex);
   const [modalActive, setModalActive] = useState(false);
   const [btnBg, setBtnBg] = useState(false);
   const [sumNumber, setSumNumber] = useState(0);
@@ -111,7 +111,7 @@ function GameArtistQuiz({ dataIndex, setState }: IGameArtistQuiz) {
             </button>
           </>
         </Modal>
-        {sumNumber === totalSum ? (
+        {sumNumber === sumQuestions ? (
           <Modal active={true} setActive={setModalActive}>
             <>
               <TotalResponse number={dataIndex} />

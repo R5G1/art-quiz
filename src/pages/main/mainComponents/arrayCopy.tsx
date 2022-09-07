@@ -1,4 +1,4 @@
-import { Iarray } from '../../../../components/type/type';
+import { Iarray } from '../../../components/type/type';
 
 function arrayCopy(check: boolean, dataIndex: number, array: Iarray[], btnBg?: boolean) {
   const copyParse: Iarray[] = JSON.parse(JSON.stringify(array));
