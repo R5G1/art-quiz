@@ -1,5 +1,5 @@
 import images from '../../../components/Data/ImagesInfo';
-import { useAppDispatch } from '../../../components/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../components/store/hooks';
 import { addState } from '../../../components/store/reducers/reducers';
 import { Iarray } from '../../../components/type/type';
 import arrayCopy from './arrayCopy';
@@ -15,12 +15,13 @@ interface ICreateCard {
 
 function CreateCard({ array, sumQuestions, setNumber, setIndex, setState }: ICreateCard) {
   const dispatch = useAppDispatch();
-
+  const arrayPicture = useAppSelector((state) => state.counter.array);
   function btnClick(params: number, index: number) {
     setState(false);
     setNumber(params);
     setIndex(index);
-    dispatch(addState(arrayCopy(false, params, array)));
+    dispatch(addState(arrayCopy(false, params, arrayPicture)));
+    console.log(array);
   }
 
   function countNumber(params: number) {

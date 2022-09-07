@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../../components/store/hooks'
 import { addState } from '../../../components/store/reducers/reducers';
 import arrayCopy from './arrayCopy';
 import QustionsArrayCheck from './gameArtistQuizComponents/qustionsArrayCheck';
+import GameQustions from './gameArtistQuizComponents/gameQustions';
 interface IGameArtistQuiz {
   dataIndex: number;
   imagesIndex: number;
@@ -23,7 +24,7 @@ function GameArtistQuiz({ dataIndex, imagesIndex, setState, sumQuestions }: IGam
 
   const [number, setNumber] = useState(imagesIndex);
   const [modalActive, setModalActive] = useState(false);
-  const [btnBg, setBtnBg] = useState(false);
+  const [btnBg, setBtnBg] = useState<boolean>(false);
   const [sumNumber, setSumNumber] = useState(0);
   const [btnBgState, setBtnBgState] = useState(false);
 
@@ -68,19 +69,13 @@ function GameArtistQuiz({ dataIndex, imagesIndex, setState, sumQuestions }: IGam
       </div>
 
       <div>
-        <div className={style.mCBgConteiner}>
-          <div
-            onClick={() => setBtnBgState((prev) => !prev)}
-            className={btnBgState ? style.mainConentBgFull : style.mainConentBg}
-            style={{
-              backgroundImage: `url(https://raw.githubusercontent.com/R5G1/image-data/master/img/${number}.jpg)`,
-            }}
-          >
-            <div className={style.mainConentBgItem}>
-              <QustionsArrayCheck number={number} checkState={modalActive} checkBoolean={btnBg} />
-            </div>
-          </div>
-        </div>
+        <GameQustions
+          setBtnBgState={setBtnBgState}
+          btnBgState={btnBgState}
+          number={number}
+          modalActive={modalActive}
+          btnBg={btnBg}
+        />
         <Questions />
         <Modal active={modalActive} setActive={setModalActive}>
           <>
