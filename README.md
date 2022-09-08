@@ -1,11 +1,10 @@
-# Drafts
+# Art Quiz
 
-#link: https://r5g1-drafts.netlify.app/
+#link: https://r5g1-art-quiz.netlify.app/
 
-#us: HTML, SCSS, SCSS-module, React, TypeScript, Webpack
+#us: HTML, SCSS, SCSS-module, React, Redux Toolkit, TypeScript, Webpack
 
-![drafts](https://user-images.githubusercontent.com/71373383/182563299-c69cfb63-4cac-4511-bcee-2004944be8a3.jpg)
-
+![Screenshot 2022-09-08 162528](https://user-images.githubusercontent.com/71373383/189136464-4118ab34-51af-4bf5-a283-792dad4ae599.png)
 
 # Getting Started with Create React App
 
