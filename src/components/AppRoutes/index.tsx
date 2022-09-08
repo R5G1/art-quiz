@@ -11,10 +11,10 @@ const AppRoutes = () => {
     <div className={styles.appRouters}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/main" element={<ArtistQuizPictures />} />
+        <Route path="/main" element={<Main />} />
         <Route path="/gameArtistQuizQuestions" element={<ArtistQuizQuestions />} />
         <Route path="/gameArtistQuizPictures" element={<ArtistQuizPictures />} />
-        <Route path="/settings" element={<Settings />} />
+        {/* <Route path="/settings" element={<Settings />} /> */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>

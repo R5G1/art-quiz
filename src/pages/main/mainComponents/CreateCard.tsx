@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import images from '../../../components/Data/ImagesInfo';
 import { useAppDispatch, useAppSelector } from '../../../components/store/hooks';
-import { addState } from '../../../components/store/reducers/reducers';
+import { addStatePictures } from '../../../components/store/reducers/reducersPictures';
+import { addStateQustions } from '../../../components/store/reducers/reducersQustions';
 import { Iarray } from '../../../components/type/type';
 import arrayCopy from './arrayCopy';
 import style from './styles/mainStyles.module.scss';
@@ -11,20 +14,27 @@ interface ICreateCard {
   setNumber: (value: number) => void | undefined;
   setIndex: (value: number) => void | undefined;
   setState: (value: boolean) => void | undefined;
+  game?: string;
 }
 
-function CreateCard({ array, sumQuestions, setNumber, setIndex, setState }: ICreateCard) {
+function CreateCard({ array, sumQuestions, setNumber, setIndex, setState, game }: ICreateCard) {
   const dispatch = useAppDispatch();
-  const arrayPicture = useAppSelector((state) => state.counter.array);
+  useEffect(() => {
+    dispatch;
+  }, [array]);
   function btnClick(params: number, index: number) {
     setState(false);
     setNumber(params);
     setIndex(index);
-    dispatch(addState(arrayCopy(false, params, arrayPicture)));
-    console.log(array);
+    game === 'GameQustions'
+      ? dispatch(addStateQustions(arrayCopy(false, index, array)))
+      : dispatch(addStatePictures(arrayCopy(false, index, array)));
   }
 
-  function countNumber(params: number) {
+  function countNumber(params: number): number {
+    if (game === 'GameQustions') {
+      return Math.floor(params * sumQuestions);
+    }
     return Math.floor(params * sumQuestions + images.length / 2);
   }
 
@@ -35,16 +45,9 @@ function CreateCard({ array, sumQuestions, setNumber, setIndex, setState }: ICre
         btnClick(countNumber(index), index);
       }}
     >
-      <div
-        className={style.mainConent}
-        style={
-          array[index].check
-            ? { background: 'var(--main-color-o)' }
-            : { background: 'var(--bg-color-o1)' }
-        }
-      >
+      <div className={array[index].check ? style.mainConentS : style.mainConentM}>
         <div className={style.mainConentName}>
-          <p>{item.name}</p>{' '}
+          <p>{item.name}</p>
           <p className={style.mainConentNameP}>
             {item.number > 0 ? `${item.number} / ${sumQuestions}` : ''}
           </p>
@@ -61,7 +64,14 @@ function CreateCard({ array, sumQuestions, setNumber, setIndex, setState }: ICre
       </div>
     </div>
   ));
-  return <div className={style.mainConteiner}>{listItems}</div>;
+  return (
+    <>
+      <Link to={'/main'}>
+        <div className={style.linkConteiner}>main</div>
+      </Link>
+      <div className={style.mainConteiner}>{listItems}</div>
+    </>
+  );
 }
 
 export default CreateCard;

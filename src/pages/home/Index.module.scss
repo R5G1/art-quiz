@@ -8,9 +8,29 @@
     background-position: 0;
     background-repeat: no-repeat;
     background-size: cover;
-    
+
     img {
         height: 255px;
         width: 100%;
+
+    }
+
+    animation-duration: 17s;
+    animation-iteration-count: infinite;
+    animation-name: game;
+    animation-timing-function: linear;
+}
+
+@keyframes game {
+    0% {
+        background-size: 100% 100%;
+    }
+
+    50% {
+        background-size: 120% 120%;
+    }
+
+    100% {
+        background-size: 100% 100%;
     }
 }

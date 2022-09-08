@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import arrayReducer from '../store/reducers/reducers';
-
+import arrayQustions from './reducers/reducersQustions';
+import arrayPictures from './reducers/reducersPictures';
 const store = configureStore({
   reducer: {
-    counter: arrayReducer,
+    counter: arrayQustions,
+    counterP: arrayPictures,
   },
 });
 export default store;

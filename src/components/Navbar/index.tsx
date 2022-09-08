@@ -24,13 +24,13 @@ const Navbar = () => {
       >
         main
       </NavLink>
-      <NavLink
+      {/* <NavLink
         className={styles.navbarLink}
         style={({ isActive }) => changeBg(isActive)}
         to="/settings"
       >
         settings
-      </NavLink>
+      </NavLink> */}
     </div>
   );
 };

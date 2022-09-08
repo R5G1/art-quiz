@@ -10,7 +10,7 @@
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    max-width: 600px;
+    max-width: 750px;
     margin: auto;
 }
 
@@ -31,6 +31,7 @@
 }
 
 .mainConentBg,
+.mainConentBgPictures,
 .mainConentBgFull {
 
     padding: 20px;
@@ -57,6 +58,24 @@
     width: 90vw;
     height: 90vh;
     cursor: pointer;
+}
+
+.mainConentBgPicturesConteiner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease 0s;
+    &:hover{
+        box-shadow: 0px 0px 10px 10px rgb(34 60 80 / 20%);
+    }
+}
+
+.mainConentBgPictures {
+    margin: 5px;
+    width: 350px;
+    height: 300px;
 }
 
 .mainConentBgItem {

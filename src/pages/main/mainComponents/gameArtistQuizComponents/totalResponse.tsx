@@ -7,18 +7,20 @@ import styles from './styles/totalResponse.module.scss';
 
 interface ITotalResponse {
   number: number;
+  gameInfo: string;
 }
 
-function TotalResponse({ number }: ITotalResponse) {
-  const array = useAppSelector((state) => state.counter.array);
+function TotalResponse({ number, gameInfo }: ITotalResponse) {
+  const arrayQ = useAppSelector((state) => state.counter.array);
+  const arrayP = useAppSelector((state) => state.counterP.array);
   function totalResponseCheck() {
-    const num = array[number].number;
+    const num = gameInfo === 'GameQustions' ? arrayQ[number].number : arrayP[number].number;
     if (num === 10) {
       return (
         <>
           <img className={styles.totalResponseImg} src={imgResultFull} alt="" />
           <img className={styles.totalResponseImg} src={imgResult} alt="" />
-          <p className={styles.totalResponseP}>Итого {array[number].number} / 10</p>
+          <p className={styles.totalResponseP}>Итого {num} / 10</p>
         </>
       );
     }
@@ -26,7 +28,7 @@ function TotalResponse({ number }: ITotalResponse) {
       return (
         <>
           <img className={styles.totalResponseImg} src={imgResult} alt="" />
-          <p className={styles.totalResponseP}>Итого {array[number].number} / 10</p>
+          <p className={styles.totalResponseP}>Итого {num} / 10</p>
         </>
       );
     }
@@ -34,7 +36,7 @@ function TotalResponse({ number }: ITotalResponse) {
       return (
         <>
           <img className={styles.totalResponseImg} src={imgResultNull} alt="" />
-          <p className={styles.totalResponseP}>Итого {array[number].number} / 10</p>
+          <p className={styles.totalResponseP}>Итого {num} / 10</p>
         </>
       );
     }

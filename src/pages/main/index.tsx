@@ -1,19 +1,35 @@
 import { Link } from 'react-router-dom';
-import GameArtistQuizMain from './gameArtistQuizQuestions/gameArtistQuizQuestions';
+import style from './index.module.scss';
 
 function Main() {
+  function countNumber(params: number) {
+    return Math.floor(Math.random() * params);
+  }
+
   return (
-    <div style={{ height: '400px', width: '400px' }}>
-      <Link to={'/gameArtistQuizQuestions'}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio veritatis dolorum, libero
-        commodi magnam exercitationem enim ipsam quam ab veniam numquam aut sint expedita nulla rem,
-        possimus ducimus, quasi ipsum.
-      </Link>
-      <Link to={'/gameArtistQuizPictures'}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio veritatis dolorum, libero
-        commodi magnam exercitationem enim ipsam quam ab veniam numquam aut sint expedita nulla rem,
-        possimus ducimus, quasi ipsum.
-      </Link>
+    <div className={style.main}>
+      <div className={style.mainConteiner}>
+        <Link to={'/gameArtistQuizQuestions'}>
+          <div
+            className={style.gameConteiner}
+            style={{
+              backgroundImage: `url(https://raw.githubusercontent.com/R5G1/image-data/master/img/${70}.jpg)`,
+            }}
+          >
+            <p>GameQustions</p>
+          </div>
+        </Link>
+        <Link to={'/gameArtistQuizPictures'}>
+          <div
+            className={style.gameConteiner}
+            style={{
+              backgroundImage: `url(https://raw.githubusercontent.com/R5G1/image-data/master/img/${230}.jpg)`,
+            }}
+          >
+            <p>GamePictures</p>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }

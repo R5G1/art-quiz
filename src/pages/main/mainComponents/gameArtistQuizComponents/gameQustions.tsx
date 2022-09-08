@@ -14,7 +14,7 @@ function GameQustions({ btnBgState, setBtnBgState, number, modalActive, btnBg }:
     <>
       <div className={style.mCBgConteiner}>
         <div
-          onClick={() => setBtnBgState(btnBgState === false ? true : false)}
+          onClick={() => setBtnBgState(btnBgState ? false : true)}
           className={btnBgState ? style.mainConentBgFull : style.mainConentBg}
           style={{
             backgroundImage: `url(https://raw.githubusercontent.com/R5G1/image-data/master/img/${number}.jpg)`,
