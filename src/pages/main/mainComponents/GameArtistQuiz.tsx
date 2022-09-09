@@ -16,6 +16,7 @@ import GamePictures from './gameArtistQuizComponents/gamePictures';
 import { Iarray } from '../../../components/type/type';
 import { addStatePictures } from '../../../components/store/reducers/reducersPictures';
 import GameTitleText from './gameArtistQuizComponents/gameTitleText';
+import Loader from '../../../components/UI/loader/loader';
 interface IGameArtistQuiz {
   dataIndex: number;
   imagesIndex: number;
@@ -132,10 +133,11 @@ function GameArtistQuiz({
             <button
               className={style.mainConentModalBtn}
               onClick={() => {
-                setSumNumber(sumNumber + 1),
-                  setModalActive(false),
-                  setNumber(number + 1),
-                  addDispatch();
+                setSumNumber(sumNumber + 1);
+                setModalActive(false);
+
+                setNumber(number + 1);
+                addDispatch();
               }}
             >
               Следующий

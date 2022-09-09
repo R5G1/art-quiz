@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import images from '../../../components/Data/ImagesInfo';
 import { useAppDispatch, useAppSelector } from '../../../components/store/hooks';
 import { addStatePictures } from '../../../components/store/reducers/reducersPictures';
 import { addStateQustions } from '../../../components/store/reducers/reducersQustions';
 import { Iarray } from '../../../components/type/type';
+import Loader from '../../../components/UI/loader/loader';
 import arrayCopy from './arrayCopy';
 import style from './styles/mainStyles.module.scss';
 
@@ -19,9 +20,20 @@ interface ICreateCard {
 
 function CreateCard({ array, sumQuestions, setNumber, setIndex, setState, game }: ICreateCard) {
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    dispatch;
-  }, [array]);
+    array.map((item, index) => {
+      fetch(
+        `url(https://raw.githubusercontent.com/R5G1/image-data/master/img/${countNumber(
+          index
+        )}.jpg)`
+      ).then(() => {
+        setLoading(false);
+      });
+    });
+  }, []);
+
   function btnClick(params: number, index: number) {
     setState(false);
     setNumber(params);
@@ -52,7 +64,6 @@ function CreateCard({ array, sumQuestions, setNumber, setIndex, setState, game }
             {item.number > 0 ? `${item.number} / ${sumQuestions}` : ''}
           </p>
         </div>
-
         <div
           className={style.mainConentBg}
           style={{
@@ -66,10 +77,16 @@ function CreateCard({ array, sumQuestions, setNumber, setIndex, setState, game }
   ));
   return (
     <>
-      <Link to={'/main'}>
-        <div className={style.linkConteiner}>main</div>
-      </Link>
-      <div className={style.mainConteiner}>{listItems}</div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Link to={'/main'}>
+            <div className={style.linkConteiner}>main</div>
+          </Link>
+          <div className={style.mainConteiner}>{listItems}</div>
+        </>
+      )}
     </>
   );
 }
