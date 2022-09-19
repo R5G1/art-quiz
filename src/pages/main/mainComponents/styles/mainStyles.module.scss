@@ -20,31 +20,31 @@
     width: 185px;
     height: 190px;
     border-radius: 10px;
-
+    
     cursor: pointer;
 
 
 }
 
 .mainConentS {
-    opacity: 1;
+    filter: grayscale(0%);
     background: var(--main-color-w);
     transition: box-shadow 0.3s ease 0s;
-
+    
     &:hover {
         box-shadow: 0px 0px 10px 10px rgba(34, 60, 80, 0.2);
     }
 }
 
 .mainConentM {
-    opacity: 0.6;
+    filter: grayscale(80%);
     background: var(--bg-color-o1);
     transition: opacity 0.3s ease 0s;
     transition: box-shadow 0.3s ease 0s;
 
     &:hover {
         box-shadow: 0px 0px 10px 10px rgba(34, 60, 80, 0.2);
-        opacity: 0.9;
+        filter: grayscale(0%);
     }
 }
 

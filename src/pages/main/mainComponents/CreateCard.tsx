@@ -82,7 +82,7 @@ function CreateCard({ array, sumQuestions, setNumber, setIndex, setState, game }
       ) : (
         <>
           <Link to={'/main'}>
-            <div className={style.linkConteiner}>main</div>
+            <div className={style.linkConteiner}>назад</div>
           </Link>
           <div className={style.mainConteiner}>{listItems}</div>
         </>

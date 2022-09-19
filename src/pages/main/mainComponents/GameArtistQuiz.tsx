@@ -17,6 +17,8 @@ import { Iarray } from '../../../components/type/type';
 import { addStatePictures } from '../../../components/store/reducers/reducersPictures';
 import GameTitleText from './gameArtistQuizComponents/gameTitleText';
 import Loader from '../../../components/UI/loader/loader';
+import { addMainAarray } from '../../../components/store/reducers/reducerMainArray';
+import arrayCopyImages from './arrayCopyImages';
 interface IGameArtistQuiz {
   dataIndex: number;
   imagesIndex: number;
@@ -35,6 +37,7 @@ function GameArtistQuiz({
 }: IGameArtistQuiz) {
   const dispatch = useAppDispatch();
 
+  const arrayImages = useAppSelector((state) => state.arrayImages.array);
   const [number, setNumber] = useState(imagesIndex);
   const [modalActive, setModalActive] = useState(false);
   const [btnBg, setBtnBg] = useState(false);
@@ -50,11 +53,13 @@ function GameArtistQuiz({
       setModalActive(true);
     }
   }
+  console.log(dataIndex, number);
 
   function addDispatch() {
     game === 'GameQustions'
       ? dispatch(addStateQustions(arrayCopy(true, dataIndex, array, btnBg)))
       : dispatch(addStatePictures(arrayCopy(true, dataIndex, array, btnBg)));
+    dispatch(addMainAarray(arrayCopyImages(true, number, arrayImages, btnBg)));
   }
 
   function Questions() {

@@ -15,22 +15,22 @@ const Navbar = () => {
   return (
     <div className={styles.navbar}>
       <NavLink className={styles.navbarLink} style={({ isActive }) => changeBg(isActive)} to="/">
-        home
+        главная
       </NavLink>
       <NavLink
         className={styles.navbarLink}
         style={({ isActive }) => changeBg(isActive)}
         to="/main"
       >
-        main
+        меню
       </NavLink>
-      {/* <NavLink
+      <NavLink
         className={styles.navbarLink}
         style={({ isActive }) => changeBg(isActive)}
-        to="/settings"
+        to="/statistics"
       >
-        settings
-      </NavLink> */}
+        статистика
+      </NavLink>
     </div>
   );
 };

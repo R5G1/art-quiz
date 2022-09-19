@@ -12,9 +12,10 @@ interface Iarray {
 interface InameDate {
   array: Iarray[];
 }
+const storageQustions = JSON.parse(localStorage.getItem('statePictures') || 'false');
 
 const initialState: InameDate = {
-  array: arrayQustions,
+  array: storageQustions ? storageQustions : arrayQustions,
 };
 
 export const counterSlice = createSlice({
@@ -23,6 +24,7 @@ export const counterSlice = createSlice({
   reducers: {
     addStateQustions: (state, action: PayloadAction<Iarray[]>) => {
       state.array = action.payload;
+      localStorage.setItem('stateQustions', JSON.stringify(state.array));
     },
   },
 });
