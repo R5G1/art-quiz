@@ -14,11 +14,15 @@ function Statistics() {
       <div key={item.imageNum}>
         {Number(item.imageNum) <= state ? (
           <div className={style.statisticsImgConteiner}>
-            <img
-              className={item.check ? style.statisticsImg : style.statisticsImgM}
-              src={`https://raw.githubusercontent.com/R5G1/image-data/master/img/${item.imageNum}.jpg`}
-              alt=""
-            />
+            <div>
+              <img
+                className={item.check ? style.statisticsImg : style.statisticsImgM}
+                src={`https://raw.githubusercontent.com/R5G1/image-data/master/img/${item.imageNum}.jpg`}
+                alt=""
+              />
+              {item.check ? <p className={style.statisticsImgPTrue}> &#9733;</p> : <p></p>}
+            </div>
+
             <div className={style.statisticsImgP}>
               <p>{item.author}</p>
               <p>{item.name}</p>

@@ -32,8 +32,8 @@ function QustionsArrayCheck({ number, checkState, checkBoolean }: IArrayCheck) {
 
   function check(params: number | boolean) {
     const styleBg = { background: 'rgb(0, 0, 0,  0.8)' };
-    const styleBgTrue = { background: 'rgb(0, 255, 13)' };
-    const styleBgfalse = { background: 'rgb(255, 0, 0)' };
+    const styleBgTrue = { background: 'rgb(3, 150, 3)' };
+    const styleBgfalse = { background: 'rgb(150, 3, 3)' };
 
     if (params === true) return styleBgTrue;
     if (params === false) return styleBgfalse;
